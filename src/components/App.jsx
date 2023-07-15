@@ -41,8 +41,8 @@ export class App extends Component {
     // Проверка наличия контакта с таким же номером
     if (existingContact) {
       toast.error(`${name} уже существует в контактах!`);
-    } else if (!this.isValidName(name)) {
-      toast.error('Некорректный формат имени!');
+    } else if (!this.isValidPhoneNumber(number)) {
+      toast.error('Некорректный формат номера!');
     } else {
       const contact = {
         id: nanoid(),
@@ -72,10 +72,10 @@ export class App extends Component {
     }));
   };
 
-  isValidName = name => {
+  isValidPhoneNumber = number => {
     const regexPattern =
-      /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
-    return regexPattern.test(name);
+      /^\+?\d{1,4}[-.\s]?\(?\d{1,3}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
+    return regexPattern.test(number);
   };
 
   render() {
